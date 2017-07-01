@@ -38,9 +38,50 @@ window.onclick = function(e) {
 </div>
 
 
-<?php
-echo "My first PHP script!";
-?> 
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #d3d3d3;">
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+var angle = 3.14/4;
+
+var x = document.createElement("INPUT");
+x.setAttribute("type", "range", 0, 100);
+document.body.appendChild(x);
+document.getElementById("test").innerHTML = x;
+
+function draw(){
+	ctx.translate(200, 400);
+	branch(100);
+}
+
+function branch(len){
+	
+	ctx.beginPath();
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, -len);
+	ctx.translate(0, -len);
+	ctx.stroke();
+	if (len > 2){
+		ctx.save();
+		ctx.rotate(angle);
+		branch(len * 0.67);
+		ctx.restore();
+		ctx.save();
+		ctx.rotate(-angle);
+		branch(len * 0.67);
+		ctx.restore();
+	}
+	
+	//ctx.moveTo(0, 0);
+	//ctx.lineTo(0, -len*0.67);
+
+	
+}
+
+draw();
+
+</script>
 
 </body>
 </html>
